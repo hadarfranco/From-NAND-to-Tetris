@@ -1,0 +1,25 @@
+lotanfa,francoland
+
+==========================
+lotan faygler ID 201655354 
+hadar franco  ID 302786538
+==========================
+
+Project04
+
+===============
+Submitted Files
+===============
+Mult.asm 		Multiplies R0 and R1 and stores the result in R2.
+Fill.asm		Runs an infinite loop that listens to the keyboard input. 
+				When a key is pressed (any key), the program blackens the screen.
+Sort.asm		The program input will be at R14(starting address),R15(length of array).
+				The program should sort the array starting at the address in R14 with length 
+				specified in R15.
+Divide.asm		The program input will be at R13,R14 while the result R13/R14 will be store at R15.	
+README          this file.
+
+=======
+Remarks
+=======
+Assembly files of the computer components.

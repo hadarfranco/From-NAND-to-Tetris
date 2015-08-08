@@ -1,0 +1,46 @@
+
+class HangMan {
+	field int state;
+	
+	constructor HangMan new() {
+		let state = 0;
+		return this;
+	}
+	
+	method void add() {
+		let state = state + 1;
+        return;
+	}
+	
+	method void print() {
+		if (state = 0) {
+			do Screen.drawLine(5, 250, 55, 250);
+			do Screen.drawLine(30, 250, 30, 20);
+			do Screen.drawLine(30, 20, 55, 20);
+			do Screen.drawLine(55, 20, 55, 50);
+		}
+		if (state = 1) {
+			do Screen.drawCircle(55, 70, 20);
+		}
+		if (state = 2) {
+			do Screen.drawLine(55, 90, 55, 180);
+		}
+		if (state = 3) {
+			do Screen.drawLine (55, 105, 40, 125);
+			do Screen.drawLine (55, 105, 70, 125);
+		}
+		if (state = 4) {
+			do Screen.drawLine (55, 180, 35, 240);
+			do Screen.drawLine (55, 180, 75, 240);
+		}
+        return;
+	}
+	
+	method boolean isGameOver() {
+		if (state = 5) {
+			return true;
+		}
+		return false;
+	}
+
+}

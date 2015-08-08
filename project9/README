@@ -1,0 +1,25 @@
+lotanfa,francoland
+
+==========================
+lotan faygler ID 201655354 
+hadar franco  ID 302786538
+==========================
+
+Project09
+
+===============
+Submitted Files
+===============
+Word.jack         this class represent the word to guess in the HangMan game.
+HangMan.jack      this class represents the hang man part of the game.
+Main.jack         this is the main class of the game. It runs the game and interact with the user.
+README            this file.
+
+=======
+Remarks
+=======
+Hangman is a guessing game for one player against computer. The computer hides a word which is a 
+capital city, and the player tries to guess it by suggesting letters. Any bad guess adds an organ 
+to the hang man, until it completed and the player lose. If the player succseed guessing in less 
+then 5 faults, he wins!
+

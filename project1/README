@@ -1,0 +1,33 @@
+lotanfa,francoland
+
+==========================
+lotan faygler ID 201655354 
+hadar franco  ID 302786538
+==========================
+
+Project01
+
+===============
+Submitted Files
+===============
+Not.hdl         Not gate. 	
+And.hdl 	    And gate.
+Or.hdl          Or gate.
+Xor.hdl         Xor gate.
+Mux.hdl         Mux gate.
+DMux.hdl        DMux gate.
+Not16.hdl       Not16 gate.
+And16.hdl       And16 gate.       
+Or16.hdl        Or16 gate. 
+Mux16.hdl       Mux16 gate.
+Or8Way.hdl      Or8Way gate.
+Mux4Way16.hdl   Mux4Way16 gate. 
+Mux8Way16.hdl   Mux8Way16 gate.
+DMux4Way.hdl    DMux4Way gate.
+DMux8Way.hdl    DMux8Way gate.
+README          this file.
+
+=======
+Remarks
+=======
+Implementations of the interfaces of each chip.

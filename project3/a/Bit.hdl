@@ -1,0 +1,10 @@
+/* Bit gate:
+If load(t-1) then out(t)=in(t-1)
+else out(t)=out(t-1). */
+CHIP Bit {
+IN in, load;
+OUT out;
+PARTS:
+Mux(a=outDFF,b=in,sel=load, out=outMux);
+DFF(in=outMux, out=outDFF, out=out);
+}

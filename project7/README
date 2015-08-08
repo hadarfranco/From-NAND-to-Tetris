@@ -1,0 +1,24 @@
+lotanfa,francoland
+
+==========================
+lotan faygler ID 201655354 
+hadar franco  ID 302786538
+==========================
+
+Project08
+
+===============
+Submitted Files
+===============
+Parser.py            Handle the parsing of a single .vm file, and encapsulates access to the input code.
+CodeWriter.py        Translates V M commands into Hack assembly code.     
+VMtranslator.py      Construct a Parser to parse the VM input file and a CodeWriter to generate code into the 
+                        corresponding output file.    
+Makefile             Makefile.
+README               This file.
+VMtranslator         shell script.
+
+=======
+Remarks
+=======
+s

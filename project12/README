@@ -1,0 +1,27 @@
+lotanfa,francoland
+
+==========================
+lotan faygler ID 201655354 
+hadar franco  ID 302786538
+==========================
+
+Project12
+
+===============
+Submitted Files
+===============
+README  		This file.
+Math.jack 		This class provides basic mathematical operations.
+String.jack		This class implements the String type and a related operations.
+Array.jack		This class implements the Array type and related operations
+Memory.jack		This class provides basic memory operations. 
+Screen.jack		This class provides graphic output to the screen.
+Keyboard.jack	This class handles user input from the keyboard
+Sys.jack		This class provides execution related services.
+Output.jack		This class handles text output to the screen.
+
+
+=======
+Remarks
+=======
+

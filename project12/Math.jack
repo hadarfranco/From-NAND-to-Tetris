@@ -1,0 +1,164 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems" 
+// by Nisan and Schocken, MIT Press. 
+// File name: projects/12/Math.jack
+
+/** * A basic math library.*/
+class Math {
+
+    static Array power;	
+ 
+	/** Initializes the library.*/ 
+	function void init() {
+        var int index, value;
+        let index = 0;
+        let value = 1;
+        let power = Array.new(16);
+         while (index < 16) {
+            let power[index] = value;
+            let index = index + 1;
+            let value = value + value;
+        }
+		return;
+	} 
+
+	/** Returns the absolute value of x. */
+	function int abs(int x) {
+		if (x < 0) {
+			return -x;
+		}
+		return x;
+	} 
+
+	/** Returns the product of x and y. */
+	function int multiply(int x, int y) { 
+		var int sum, shiftedX, counter, bit;
+		let sum = 0;
+		let shiftedX = x;
+		let counter = 0;
+		let bit = 1;
+		// in case of one of the given numbers is zeros
+		if ((x = 0) | (y = 0)) {
+			return 0;
+		}
+		while (counter < 16) {
+			if ((y & bit) = bit) {
+				let sum = sum + shiftedX;
+			}
+			let shiftedX = shiftedX + shiftedX;
+			let counter = counter + 1;
+			let bit = bit + bit;
+		}
+		return sum;
+	}
+
+	/** Returns the integer part of x/y. */ 
+	function int divide(int x, int y) {
+		var int q, currY;
+		var boolean isNeg;
+		let isNeg = false;
+		if (x < 0) {
+			let isNeg = true;
+			let x = -x;
+		}
+		if (y < 0) {
+			let isNeg = ~isNeg;
+			let y = -y;
+		}		
+		if (x = y) {
+			return 1;
+		}
+		else {
+			if (x < y) {
+				return 0;
+            }
+		}	
+        if ((x - y) < y) {
+            return 1;
+        }
+        let q = 1;
+		let currY = y + y;
+		let q = q + q;
+		
+		while (currY < (x - currY))  {
+				let currY = currY + currY;
+				let q = q + q;
+		}
+		let q = q + Math.divide(x - currY, y);
+		if (isNeg) {
+			return -q;
+		}
+		return q;
+	}
+
+	/** Returns the integer part of the square root of x. */
+	function int sqrt(int x) { 
+		var int low, high, med;
+		let low = 0;
+		let high = 181;
+		while (low < high) {
+			let med = Math.divide (low + high, 2);
+			if (Math.multiply(med, med) > x) {
+				let high = med - 1;
+			}
+			else {
+				let low = med + 1;
+			}
+		}
+		return low;	
+	}
+
+
+	/** Returns the greater number. */
+	function int max(int a, int b) {
+		if (a > b) {
+			return a;
+		}
+		return b;
+	}
+
+	/** Returns the smaller number. */
+	function int min(int a, int b) {
+		if (a < b) {
+			return a;
+		}
+		return b;
+	}
+
+        function int multPowerOfTwo (int x, int power) {
+        var int index, result;
+        let index = 1;
+        let result = x;
+        while (index < (power + 1)) {
+            let result = result + result;
+            let index = index + 1;
+        }
+        return result;
+    }
+
+    function int devideSixteen(int x) {
+        var int index, result;
+        let index = 4;
+        let result = 0;
+        while (index < 16) {
+            if ((power[index]&x) = power[index]) {
+                let result = result + power[index - 4];
+            }    
+            let index = index + 1;
+        } 
+        return result;
+    }
+
+    function int devideTwo(int x) {
+        var int index, result;
+        let index = 1;
+        let result = 0;
+        while (index < 16) {
+            if ((power[index]&x) = power[index]) {
+                let result = result + power[index - 1];
+            }    
+            let index = index + 1;
+        } 
+        return result;
+    }
+}

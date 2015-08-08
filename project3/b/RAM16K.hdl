@@ -1,0 +1,15 @@
+/* RAM16K:
+out(t)=RAM[address(t)](t)
+If load(t-1) then
+RAM[address(t-1)](t)=in(t-1). */
+CHIP RAM16K {
+IN in[16], address[14], load;
+OUT out[16];
+PARTS:
+DMux4Way(in=load, sel=address[0..1], a=load1, b=load2, c=load3, d=load4);
+RAM4K(in=in, address=address[2..13], load=load1, out=out1);
+RAM4K(in=in, address=address[2..13], load=load2, out=out2);
+RAM4K(in=in, address=address[2..13], load=load3, out=out3);
+RAM4K(in=in, address=address[2..13], load=load4, out=out4);
+Mux4Way16(a=out1, b=out2, c=out3, d=out4, sel=address[0..1], out=out);
+}

@@ -1,0 +1,191 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/12/Screen.jack
+
+/**
+ * Graphic screen library.
+ */
+class Screen {	
+	
+	static boolean color;
+
+    /** Initializes the Screen. */
+    function void init() {
+    	let color = true;
+       	return;
+    }
+
+    /** Erases the whole screen. */
+    function void clearScreen() {
+    	var int indexScreen;
+    	let indexScreen = 16384;
+    	while (indexScreen < 24576) {
+    		do Memory.poke(indexScreen, false);
+    		let indexScreen = indexScreen + 1;
+    	}
+    	return;
+    }
+
+    /** Sets the color to be used in further draw commands
+     *  where white = false, black = true. */
+    function void setColor(boolean b) {
+    	let color = b;
+    	return;
+    }
+    
+      /** Draws the (x, y) pixel. */
+    function void drawPixel(int x, int y) {
+		var int location, bitValue, bit, index, paint, line, col;
+        let  line = Math.multPowerOfTwo(y, 5);
+        let col = Math.devideSixteen(x);
+		let location = 16384 + line + col;
+        let bitValue = x&15;
+        let index = 0;
+        let bit = 1;
+        while (index < bitValue) {
+            let bit = bit + bit;
+            let index = index + 1;
+        }
+        if (color) {
+            let paint = bit | Memory.peek(location);
+        }
+        else {
+            let paint = ~bit & Memory.peek(location);   
+        }
+		do Memory.poke(location, paint);
+    	return;
+    }
+    
+    
+    /** Draws a line from (x1, y1) to (x2, y2). */
+    function void drawLine(int x1, int y1, int x2, int y2) {
+		var int currX, currY, adyMinusbdx, dx, dy;
+        var boolean xUp, yUp;
+		let currX = x1;
+		let currY = y1;
+        let adyMinusbdx = 0;
+        let dx = Math.abs(x2 - x1);
+        let dy = Math.abs(y2 - y1);
+        		
+		if (currX = x2) {
+			if (currY = y2) {
+				// only one pixel needs to be drawn
+				do Screen.drawPixel(x2, y2);
+				return;
+			}
+			// the vertical case - up
+			if (currY > y2) {
+				while (currY > y2) {
+					let currY = currY - 1;
+					do Screen.drawPixel (currX, currY);
+				}
+				do Screen.drawPixel (currX, currY);
+				return;
+			}
+			// currY < y2
+			else {
+				// the vertical case - down
+				while (currY < y2) {
+					let currY = currY + 1;
+					do Screen.drawPixel (currX, currY);				
+				}
+				do Screen.drawPixel (currX, currY);		
+				return;
+			}
+		}
+		if (currY = y2) {
+			// the horiziontal case - 
+			if (currX > x2) {
+				while (currX > x2) {
+					let currX = currX - 1;
+					do Screen.drawPixel (currX, currY);
+				}
+				do Screen.drawPixel (currX, currY);
+				return;
+			}
+			// currX < x2
+			else {
+				// the horiziontal case - 
+				while (currX < x2) {
+					let currX = currX + 1;
+					do Screen.drawPixel (currX, currY);
+				}
+				do Screen.drawPixel (currX, currY);
+				return;
+			}			
+		}
+		
+        // diagonal
+        if (x2 > x1) {
+            let xUp = true;        
+        }
+        else {
+            let xUp = false;        
+        }
+        if (y2 > y1) {
+            let yUp = true;                    
+        }
+        else {
+            let yUp = false;
+        }
+        while (~ (currX = x2) | ~ (currY = y2)) {
+            do Screen.drawPixel (currX, currY);
+            if (adyMinusbdx < 0) {
+                // change a
+                if (xUp) {
+                    let currX = currX + 1;
+                }
+                else {
+                    let currX = currX -1;
+                }
+                let adyMinusbdx = adyMinusbdx + dy;
+            }
+            else {
+                // change b
+                if (yUp) {
+                    let currY = currY + 1;
+                }
+                else {
+                    let currY = currY -1;
+                }
+                let adyMinusbdx = adyMinusbdx - dx;
+            }
+        }
+        do Screen.drawPixel (currX, currY);	
+        return;	
+    }
+
+    /** Draws a filled rectangle where the top left corner
+     *  is (x1, y1) and the bottom right corner is (x2, y2). */
+    function void drawRectangle(int x1, int y1, int x2, int y2) {
+        var int currLine, currX;
+        let currLine = y1;
+        while (currLine < (y2 + 1)) {
+            let currX = x1;
+            while (currX < (x2 + 1)) {        
+                do Screen.drawPixel(currX,currLine);
+                let currX = currX + 1;        
+            }
+            let currLine = currLine + 1; 
+        }
+        return;
+    }
+
+    /** Draws a filled circle of radius r around (cx, cy). */
+    function void drawCircle(int cx, int cy, int r) {
+        var int dy, rPower, dyPower, line;       
+        if (r > 181) {
+            let r = 181;
+        }   
+        let dy = -r + 1;
+        let rPower = r*r;
+        while (dy < r) {
+            let dyPower = (dy)*(dy);
+            let line = Math.sqrt(rPower - dyPower);
+            do Screen.drawLine(cx-line, cy+dy, cx+line, cy+dy);
+            let dy = dy + 1; 
+        }
+        return;
+    }
+}

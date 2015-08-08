@@ -1,0 +1,93 @@
+// This file is part of www.nand2tetris.org 
+// and the book "The Elements of Computing Systems" 
+// by Nisan and Schocken, MIT Press. 
+// File name: projects/12/Memory.jack
+
+/**
+* Memory operations library.
+*/
+
+class Memory {
+
+	static Array memory;
+	static int start, end;
+
+	/** Initializes memory parameters. */
+	function void init() {
+		let memory = 0; 
+		let start = 2048; 
+		let end = 16383;
+		let memory[start] = 0;
+		let memory[start + 1] = -1;
+		return;
+	}
+
+	/** Returns the value of the main memory at the given address. */ 
+	function int peek(int address) {
+		return memory[address];
+	} 
+
+	/** Sets the value of the main memory at this address 
+	* to the given value. */ 
+	function void poke(int address, int value) {
+		let memory[address] = value;
+		return;
+	} 
+
+	/** finds and allocates from the heap a memory block of the
+	* specified size and returns a reference to its base address. */ 
+	function int alloc(int size) {
+		var int pointer, newPointer;
+		let pointer = start + 1;
+		// find the next free space
+		while (memory[pointer] > 0) {
+			// check if you can find free space between two objects
+			if ((memory[pointer] - memory[pointer - 1] - 2 - (pointer + 1)) > (size + 2)) {
+				let newPointer = memory[pointer];
+				let memory[pointer] = pointer + memory[pointer - 1] + 3;
+				let pointer = memory[pointer] - 1;
+				let memory[pointer - 1] = size;
+                let memory[pointer] = newPointer;
+				return pointer + 1;
+			}		
+			let pointer = memory[pointer] - 1;
+		}
+		// check if there is enough space for the new object
+		if ((end - pointer - memory[pointer - 1] - 2) > size) {
+			// this is the first object
+			if ((memory[pointer - 1] = 0) & (pointer = (start + 1))) {
+				let memory[start] = size;
+				return pointer + 1;
+			}
+			else {
+				let memory[pointer] = pointer + memory[pointer - 1] + 3;
+				let pointer = memory[pointer] - 1;
+				let memory[pointer - 1] = size;
+				let memory[pointer] = -1;
+				return pointer + 1;
+			}
+		}
+		else {
+		// not enough space for the new object
+			return -1;	
+		}
+	}
+
+	/** De-allocates the given object and frees its space. */ 
+	function void deAlloc(int object) { 
+		var int pointer, prevPointer;
+		let pointer = start + 1;
+		// the object is located on the base of the heap
+		if (object = (start + 2)) {
+			let memory[start] = 0;
+			return;
+		}
+		// find the previous pointer
+		while (~(memory[pointer] = object)) {
+			let pointer = memory[pointer] - 1;
+		}
+		let prevPointer = pointer;
+		let memory[prevPointer] = memory[object - 1];
+		return;
+	} 
+}

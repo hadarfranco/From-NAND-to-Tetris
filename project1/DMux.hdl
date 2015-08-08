@@ -1,0 +1,10 @@
+/* DMux gate:
+If sel=0 then {a=in, b=0} else {a=0, b=in} */
+CHIP DMux {
+IN in, sel;
+OUT a, b;
+PARTS:
+Not(in=sel, out=notsel);
+And(a=notsel, b=in, out=a);
+And(a=sel, b=in, out=b);
+}

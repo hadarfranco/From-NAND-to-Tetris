@@ -1,0 +1,9 @@
+/* ShiftLeft gate:
+Multiply by 2 the input
+*/
+CHIP ShiftLeft {
+IN in[16];
+OUT out[16];
+PARTS:
+Add16(a=in, b=in, out=out);
+}

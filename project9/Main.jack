@@ -1,0 +1,56 @@
+class Main {
+    function void main() {
+        var HangMan hang;
+        var Word word;
+        var char input;
+        var int numInput;
+
+        do Screen.clearScreen();
+        
+        do Output.moveCursor(7, 25);
+        do Output.printString("Lets Get Started!!");
+        do Output.moveCursor(10, 3);
+        let numInput = Keyboard.readInt("Please choose a number between 1 to 10 and press enter");
+        do Screen.clearScreen();        
+
+        let hang = HangMan.new();
+        let word = Word.new(numInput-1);
+        
+        // print the first state of the game:
+        do hang.print();
+        do word.print();
+        
+        while ((~(hang.isGameOver())) & (~(word.isWon()))) {
+            do Output.moveCursor(0, 25);
+            do Output.printString("please enter a letter");
+            let input = Keyboard.readChar();
+            if (word.contains(input)) {
+                do word.print();
+            }
+            else {
+                do hang.add();
+                do hang.print();
+            }
+        }
+        
+        do Main.clearText();
+
+        if (hang.isGameOver()) {
+            do Output.moveCursor(0, 30);
+            do Output.printString("You Lost!!!");
+        }
+        else {
+            do Output.moveCursor(0, 30);
+            do Output.printString("You Won!!!");
+        }
+
+        return;
+    }
+
+    function void clearText() {
+        do Screen.setColor(false);
+        do Screen.drawRectangle(0,0,511,10);        
+        do Screen.setColor(true);
+        return;   
+    }
+}

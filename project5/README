@@ -1,0 +1,23 @@
+lotanfa,francoland
+
+==========================
+lotan faygler ID 201655354 
+hadar franco  ID 302786538
+==========================
+
+Project05
+
+===============
+Submitted Files
+===============
+Memory.hdl        Entire RAM address space 			
+CPU.hdl 	      The Hack CPU 
+Computer.hdl      The platform's top-most chip 
+ExtendAlu.hdl     Extend ALU chip
+CpuMul.hdl        This chip is an extension of the book CPU by using the extended ALU
+README            this file.
+
+=======
+Remarks
+=======
+Implementations of the interfaces of each chip.

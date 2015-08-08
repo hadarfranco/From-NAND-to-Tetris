@@ -1,0 +1,159 @@
+// This file is part of www.nand2tetris.org 
+// and the book "The Elements of Computing Systems" 
+// by Nisan and Schocken, MIT Press.
+// File name: projects/12/String.jack
+
+/** * Represents a String object. Implements the String type. */ 
+class String {
+
+	field Array s;
+	field int len;
+	field int max;
+
+	/** Constructs a new empty String with a maximum length of maxLength. */ 
+	constructor String new(int maxLength) {
+        if (maxLength > 0) {
+    		let s = Array.new(maxLength);
+        }
+        else {
+    		let s = Array.new(1);                    
+        }
+		let len = 0;
+		let max = maxLength;
+		return this;
+	}
+	
+	/** De-allocates the string and frees its space. */
+	method void dispose() {
+        do s.dispose();
+	//	do Memory.deAlloc(this);
+		return;
+	}
+	
+	/** Returns the current length of this String. */ 
+	method int length() {
+		return len;
+	}
+	
+	/** Returns the character at location j. */
+	method char charAt(int j) { 
+		return s[j];
+	}
+	
+	/** Sets the j'th character of this string to be c. */
+	method void setCharAt(int j, char c) { 
+		let s[j] = c;
+		return;
+	} 
+	
+	/** Appends the character c to the end of this String. 
+	* Returns this string as the return value. */ 
+	method String appendChar(char c) {
+        if (len < max) {
+		    let s[len] = c;
+		    let len = len + 1;
+        }		    
+        return this; 
+	}
+	
+	/** Erases the last character from this String. */
+	method void eraseLastChar() {
+        if (len > 0) {        
+    		let len = len - 1;
+        }
+		return;
+	}
+	
+	/** Returns the integer value of this String until the first non
+	 * numeric character. */ 
+	method int intValue() {
+		var int value, d, counter; 
+		var boolean negative;
+		let counter = 0;
+		let value = 0;
+		let d = 0;
+		if (s[0] = 45) {
+			let negative = true;
+			let counter = counter + 1;
+		}
+		else {
+			let negative = false;
+		}
+		while (counter < len) {
+			// maybe it doesn't needed
+			if ((s[counter] > 47) & (s[counter] < 58)) {
+				let d = s[counter] - 48;
+				let value = value * 10 + d;
+				let counter = counter + 1;
+			}
+			else {
+				let counter = len;
+			}
+		}
+		if (negative) {
+			let value = -value;
+		}
+		return value;
+	} 
+	
+	/** Sets this String to hold a representation of the given number. */ 
+	method void setInt(int number) {
+		var int c, last, tempNumber, lenNumber, temp;
+		var boolean negative;
+		
+		let lenNumber = 0;
+		
+		if (number < 0) {
+			let negative = true;
+			let tempNumber = -number;
+		}
+		else {
+			let negative = false;
+			let tempNumber = number;
+		}
+		
+		let temp = tempNumber;
+	
+        if (temp = 0) {
+            let s[0] = 48;
+            let len = 1;
+            return;
+        }
+		
+        // check the length of the number
+		while (temp > 0) {
+			let lenNumber = lenNumber + 1;
+			let temp = temp / 10;
+		}
+		
+		if (negative) {
+			let lenNumber = lenNumber + 1;
+			let s[0] = 45;
+		}
+		let len = lenNumber;
+		
+		while (tempNumber > 0) {
+			let last = tempNumber - ((tempNumber / 10) * 10);
+			let c = last + 48;	
+			let s[lenNumber - 1] = c;
+			let tempNumber = tempNumber / 10;
+			let lenNumber = lenNumber - 1;
+		}
+		return;
+	}
+	
+	/** Returns the new line character. */ 
+	function char newLine() { 
+		return 128;
+	} 
+	
+	/** Returns the backspace character. */ 
+	function char backSpace() {
+		return 129; 
+	}
+	
+	/** Returns the double quote (") character. */
+	function char doubleQuote() {
+		return 34;	
+	} 
+}

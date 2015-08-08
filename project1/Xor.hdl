@@ -1,0 +1,11 @@
+/* Xor gate:
+If a<>b then out=1 else out=0 */
+CHIP Xor {
+IN a, b;
+OUT out;
+PARTS:
+Or(a=a, b=b, out=w1);
+And(a=a, b=b, out=w2);
+Not(in=w2, out=w3);
+And(a=w1, b=w3, out=out);
+}

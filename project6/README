@@ -1,0 +1,24 @@
+lotanfa,francoland
+
+==========================
+lotan faygler ID 201655354 
+hadar franco  ID 302786538
+==========================
+
+Project06
+
+===============
+Submitted Files
+===============
+Assembler.py      the main class.
+Code.py           the code object as described in the project descreption.
+Parser.py         the parser object as described in the project descreption.
+SymbolTable.py    the symbol table object as described in the project descreption.
+Assembler         shell script.
+Makefile          a makefile.
+README            this file.
+
+=======
+Remarks
+=======
+

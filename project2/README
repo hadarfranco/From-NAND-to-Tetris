@@ -1,0 +1,26 @@
+lotanfa,francoland
+
+==========================
+lotan faygler ID 201655354 
+hadar franco  ID 302786538
+==========================
+
+Project02
+
+===============
+Submitted Files
+===============
+HalfAdder.hdl         HalfAdder gate. 	
+FullAdder.hdl 	      FullAdder gate.
+Add16.hdl             Add16 bit gate.
+Inc16.hdl             16 bit Incrementer gate.
+ALU.hdl               Arithmetic logic unit.
+ShiftLeft.hdl         Multiply the input by two.
+ShiftRight.hdl        Divide the input by two
+Mul.hdl       	      The chip will multiply 2 numbers.
+README                this file.
+
+=======
+Remarks
+=======
+Implementations of the interfaces of each chip.

@@ -1,0 +1,63 @@
+
+class Word {
+	static Array words;
+	field String printWord;
+	field int lengthOfPrint;
+    field char underscore;
+    field String word;
+	
+	constructor Word new(int numOfWord){
+        do Word.initWords();
+        let word = words[numOfWord];
+		let printWord = "_ _ _ _ _ _";
+		let lengthOfPrint = 0;
+        let underscore = printWord.charAt(0);
+		return this;
+	}
+	
+	method boolean contains(char input){
+		var boolean succ;
+		var int j;
+		let succ = false;
+		let j = 0;
+		while (j < word.length()) {
+			if (word.charAt(j) = input) {
+                if (printWord.charAt(j * 2) = underscore) {
+                    do printWord.setCharAt(j * 2, input);
+				    let lengthOfPrint = lengthOfPrint + 1;
+				    let succ = true;
+                }
+			}
+			let j = j + 1;
+		}
+		return succ;
+	}
+	
+	method boolean isWon() {
+		if (lengthOfPrint = word.length()) {
+			return true;
+		}
+		return false;
+	}
+	
+	method void print() {
+		do Output.moveCursor(20, 35);
+		do Output.printString(printWord);
+        return;
+	}
+
+    function void initWords() {
+        let words = Array.new(10);
+        let words[0] = "MADRID";
+        let words[1] = "LONDON";
+        let words[2] = "PRAGUE";
+        let words[3] = "DUBLIN";
+        let words[4] = "LISBON";
+        let words[5] = "BERLIN";
+        let words[6] = "TEHRAN";
+        let words[7] = "VIENNA";
+        let words[8] = "MOSCOW";
+        let words[9] = "HAVANA";
+        return;
+    }
+}
